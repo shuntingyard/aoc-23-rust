@@ -1,0 +1,52 @@
+# Benchmarks are done ad-hoc (typically Sway and sshd running, Neovim/rust-analyzer up)
+
+* PC is Arch Linux: Intel(R) Core(TM) i7-5500U CPU @ 2.40GHz, 8gb ram
+
+## Commands
+
+* `cargo bench -p day-nn`
+* `just dhat day-nn partN` (TODO: does dhat work correctly for me?)
+
+## Arch Linux
+
+Timer precision: 17 ns
+day_01    fastest       │ slowest       │ median        │ mean          │ samples │ iters
+├─ part1  73.57 µs      │ 109.3 µs      │ 74.33 µs      │ 76.67 µs      │ 100     │ 100
+╰─ part2  323.2 µs      │ 396.5 µs      │ 324 µs        │ 328.1 µs      │ 100     │ 100
+
+cargo run -q --profile dhat --features dhat-heap --package day-01 --bin part1
+54634
+dhat: Total:     1,032 bytes in 2 blocks
+dhat: At t-gmax: 1,032 bytes in 2 blocks
+dhat: At t-end:  1,024 bytes in 1 blocks
+dhat: The data has been saved to dhat-heap.json, and is viewable with dhat/dh_view.html
+
+cargo run -q --profile dhat --features dhat-heap --package day-01 --bin part2
+53855
+dhat: Total:     1,032 bytes in 2 blocks
+dhat: At t-gmax: 1,032 bytes in 2 blocks
+dhat: At t-end:  1,024 bytes in 1 blocks
+dhat: The data has been saved to dhat-heap.json, and is viewable with dhat/dh_view.html
+
+**part2 here:** still same function as part1, nom however had been simplified !!
+day_02    fastest       │ slowest       │ median        │ mean          │ samples │ iters
+├─ part1  88.68 µs      │ 130.1 µs      │ 89.04 µs      │ 91.88 µs      │ 100     │ 100
+╰─ part2  66.79 µs      │ 99.1 µs       │ 67.16 µs      │ 68.28 µs      │ 100     │ 100
+
+Timer precision: 17 ns
+day_02    fastest       │ slowest       │ median        │ mean          │ samples │ iters
+├─ part1  88.89 µs      │ 138.3 µs      │ 89.23 µs      │ 91.19 µs      │ 100     │ 100
+╰─ part2  68.81 µs      │ 170.7 µs      │ 69.22 µs      │ 71.13 µs      │ 100     │ 100
+
+Timer precision: 17 ns
+day_03    fastest       │ slowest       │ median        │ mean          │ samples │ iters
+├─ part1  1.46 ms       │ 1.854 ms      │ 1.475 ms      │ 1.486 ms      │ 100     │ 100
+╰─ part2  thread 'main' panicked at 'not yet implemented: day part 2', day-03/src/part2.rs:7:5
+
+cargo run -q --profile dhat --features dhat-heap --package day-03 --bin part1
+531611
+dhat: Total:     1,846,072 bytes in 5,386 blocks
+dhat: At t-gmax: 881,216 bytes in 1,785 blocks
+dhat: At t-end:  1,024 bytes in 1 blocks
+dhat: The data has been saved to dhat-heap.json, and is viewable with dhat/dh_view.html
+

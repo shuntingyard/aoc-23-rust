@@ -1,14 +1,14 @@
+# Use `just work day-01 part1` to work on the specific binary for a specific day's problems
 work day part:
-    cargo watch -x "check -p {{day}}" -s "just test -p {{day}}" -s "just lint {{day}}" -s "just bench {{day}} {{part}}" -s "just flamegraph {{day}} {{part}}"
+    cargo watch -x "check -p {{day}}" -s "just test {{part}} -p {{day}}" -s "just lint {{day}}" -s "just bench {{day}} {{part}}" -s "just flamegraph {{day}} {{part}}"
 www-watch:
-   cargo +nightly leptos watch --project www --release
+   RUST_LOG=info cargo +nightly leptos watch --project www
 www-build:
    cargo +nightly leptos build --project www --release
 lint day:
-    clippy-tracing --action check --exclude target --exclude benches --exclude www
     cargo clippy -p {{day}}
-test +FLAGS='-p day-01':
-    cargo nextest run {{FLAGS}}
+test part +FLAGS='-p day-01':
+    cargo nextest run {{FLAGS}} {{part}}
 bench-all:
     cargo bench -q > benchmarks.txt
 bench day part:
@@ -16,6 +16,6 @@ bench day part:
 flamegraph day part:
     cargo flamegraph --profile flamegraph --root --package {{day}} --bin {{part}} -o flamegraphs/{{day}}--{{part}}.svg
 dhat day part:
-    cargo run --profile dhat --features dhat-heap --package {{day}} --bin {{part}}
+    cargo run -q --profile dhat --features dhat-heap --package {{day}} --bin {{part}}
 create day:
     cargo generate --path ./daily-template --name {{day}}
