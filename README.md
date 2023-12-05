@@ -12,3 +12,6 @@ for a rusty take in 2023.
 2. Quite like 1. - learning more `nom`.
 3. Learned iterator things, had the right idea but even my part1 was too buggy
     to get a star.
+4. Easy and fun again. Most time was spent setting up nom to read cards correctly.
+    Modifying part1's iterator constructs to move a BTreeMap into a closure
+    for tracking the number of repetitions for each card was a breeze...
