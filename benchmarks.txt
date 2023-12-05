@@ -7,6 +7,11 @@
 * `cargo bench -p day-nn`
 * `just dhat day-nn partN` (TODO: does dhat work correctly for me?)
 
+## Criterion HTML Reports
+
+When starting a http server (Python defaults) in the project root, these
+reports are accessible under e.g. <http://iceland:8000/target/criterion/report/>
+
 ## Arch Linux
 
 Timer precision: 17 ns
