@@ -3,7 +3,7 @@ use std::collections::BTreeMap;
 use nom::{
     self,
     bytes::complete::tag,
-    character::complete::{self, multispace1},
+    character::complete::{self, space1},
     multi::separated_list1,
     sequence::tuple,
     IResult,
@@ -61,15 +61,15 @@ pub fn process(input: &str) -> miette::Result<String, AocError> {
 /// Result rhs now holds: (card_id, winning_numbers, numbers_you_have)
 fn parse_card(i: &str) -> IResult<&str, (u32, Vec<u32>, Vec<u32>)> {
     // Now we need the header's card number
-    let (i, (_, _, card_id, _)) = tuple((tag("Card"), multispace1, complete::u32, tag(":")))(i)?;
+    let (i, (_, _, card_id, _)) = tuple((tag("Card"), space1, complete::u32, tag(":")))(i)?;
 
     // Then get what's required to eval cards.
     let (i, (_, winning_numbers, _, _, numbers_you_have)) = tuple((
-        multispace1, // *Must* eat space before e.g. '30  1 29'...
-        separated_list1(multispace1, complete::u32),
+        space1, // *Must* eat space before e.g. '30  1 29'...
+        separated_list1(space1, complete::u32),
         tag(" |"),
-        multispace1,
-        separated_list1(multispace1, complete::u32),
+        space1,
+        separated_list1(space1, complete::u32),
     ))(i)?;
 
     if i != "" {

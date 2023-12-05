@@ -1,4 +1,4 @@
-# My Rusty Advent of Code 2023
+# My Rusty Advent of Code 2023 🎄
 
 My *framework* here is a copy of Christopher Biscardi's
 [implementation]( https://github.com/ChristopherBiscardi/advent-of-code/tree/main/2023/rust)

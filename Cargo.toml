@@ -6,7 +6,8 @@ members = ["day-*"]
 
 [workspace.dependencies]
 dhat = "0.3.2"
-divan = "0.1.3" # Another crate like `criterion`
+criterion = { version = "0.4", features = ["html_reports"] }
+divan = "0.1.3" # Another crate like `criterion` (Leave it in, even though I prefer criterion?)
 itertools = "0.12.0"
 miette = { version = "5.10.0", features = ["fancy"] }
 nom = "7.1.3"
