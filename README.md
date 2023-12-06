@@ -15,3 +15,7 @@ for a rusty take in 2023.
 4. Easy and fun again. Most time was spent setting up nom to read cards correctly.
     Modifying part1's iterator constructs to move a BTreeMap into a closure
     for tracking the number of repetitions for each card was a breeze...
+5. Mapping seeds to soils to ... locations - was a bit hard.
+
+    - part1: interesting use of Range to do the routing. Used fold_many1 for parsing.
+    - part2: skipped
