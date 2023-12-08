@@ -59,3 +59,8 @@ Day 4 looking fine
 day_04    fastest       │ slowest       │ median        │ mean          │ samples │ iters
 ├─ part1  263.2 µs      │ 382.6 µs      │ 264 µs        │ 268.4 µs      │ 100     │ 100
 ╰─ part2  330.7 µs      │ 691.3 µs      │ 332 µs        │ 360.9 µs      │ 100     │ 100
+
+Day 7: Ok (538 µs, 565 µs on criterion)
+day_07    fastest       │ slowest       │ median        │ mean          │ samples │ iters
+├─ part1  547.5 µs      │ 688.2 µs      │ 549.3 µs      │ 563.4 µs      │ 100     │ 100
+╰─ part2  574.5 µs      │ 643 µs        │ 576.7 µs      │ 583.7 µs      │ 100     │ 100

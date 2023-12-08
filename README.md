@@ -19,3 +19,12 @@ for a rusty take in 2023.
 
     - part1: interesting use of Range to do the routing. Used fold_many1 for parsing.
     - part2: skipped
+
+6. Didn't do it. Building blocks for a solution:
+    `nom::character::complete::line_ending` and `std::iter::zip`
+
+7. Camel Cards - was real fun and I learned things:
+
+    - part1: Lifetimes (discarded later) and implementation
+        of PartialEq, Eq, PartialOrd, Ord for `Hand`
+    - part2: convert BTreeMap to a Vec and sort by (value, key) in decreasing order
