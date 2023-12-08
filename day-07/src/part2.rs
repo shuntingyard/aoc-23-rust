@@ -82,7 +82,9 @@ struct Hand {
 
 impl Hand {
     fn new(cards: &[Card; 5], bid: u32) -> Self {
-        // Determine the type of this hand
+        // Do preliminary stuff like
+        // - putting cards into bins by card.value
+        // - counting jokers
         let mut bins: BTreeMap<u64, u8> = BTreeMap::new();
         let mut jokers = 0u8;
 
@@ -98,15 +100,15 @@ impl Hand {
             }
         }
 
-        // Patch the most valuable with jokers.
+        // Patch the most valuable bin with jokers.
         if 0 < jokers && jokers < 5 {
             let mut kv_vec = Vec::from_iter(bins.clone());
-            // Hopefully max k,v first?
+            // Find the most valuable bin by (value, key) decreasing sort order:
             kv_vec.sort_by(|&(ka, va), &(kb, vb)| (vb, kb).cmp(&(va, ka)));
             // dbg!(&kv_vec);
             let kvmax = kv_vec.iter().take(1).collect_vec();
-            let kvmax = kvmax[0];
-            // dbg!(&kvmax);
+            let kvmax = kvmax[0]; // This is only allowed on hands with at least 1 non-joker card!
+                                  // dbg!(&kvmax);
             let (k, _) = kvmax;
             if let Some(vmax) = bins.get(k) {
                 bins.insert(*k, *vmax + jokers);
@@ -119,7 +121,7 @@ impl Hand {
             debug!("{bid:4}   No Jokers: {bins:?}");
         }
 
-        // Then continue as in part1
+        // Prepare to determine the type of this hand
         let bins = bins.values().sorted().rev().collect_vec();
 
         // TODO: Somewhat ugly to have to do this without a match clause. Try better!
@@ -229,7 +231,7 @@ T55J5 684
 KK677 28
 KTJJT 220
 QQQJA 483";
-        assert_eq!("5_905", process(input)?);
+        assert_eq!("5905", process(input)?);
         Ok(())
     }
 }
