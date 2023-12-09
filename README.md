@@ -28,3 +28,10 @@ for a rusty take in 2023.
     - part1: Lifetimes (discarded later) and implementation
         of PartialEq, Eq, PartialOrd, Ord for `Hand`
     - part2: convert BTreeMap to a Vec and sort by (value, key) in decreasing order
+
+8. Haunted Wasteland
+
+    - part1: a simple automaton to reach the state labeled ZZZ
+    - part2: printed cycle lengths to each individual __Z-state from all six
+        start states, Ctrl-c; then got prime factors of lengths and (manually)
+        calculated the least common multiple.
