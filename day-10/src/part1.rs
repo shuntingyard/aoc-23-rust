@@ -150,6 +150,8 @@ pub fn process(input: &str) -> miette::Result<String, AocError> {
                              // direction *not* to take.
 
     // Recursion doesn't hold on real graphs; so loop...
+    //
+    //  (Just checked if this would work with a tail call, it doesn't either!)
     fn traverse_and_count(
         mut dep: Point,
         goal: Point,
