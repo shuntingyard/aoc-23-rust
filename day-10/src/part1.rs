@@ -70,7 +70,7 @@ pub fn process(input: &str) -> miette::Result<String, AocError> {
                 })
         })
         /*
-           There is `let gr: Graph<(), ()> = Graph::from_edges(&[...]);` too :-8
+           `Graph::from_edges(&[...]);` doesn't work on our custom node type (Point) !
         */
         .for_each(|edge| {
             if !graph.contains_node(edge.0) {
@@ -100,7 +100,7 @@ pub fn process(input: &str) -> miette::Result<String, AocError> {
 
     // Find start
     //
-    // There might be 8 incoming for some points:
+    // There might be 8 incoming for points other than Start:
     //  L|J
     //  - -
     //  F|7
@@ -136,9 +136,9 @@ pub fn process(input: &str) -> miette::Result<String, AocError> {
     }
     assert!(bipeds.len() == 2);
 
-    // traverse... (We need to roll our own traversal,
+    // traverse... We need to roll our own traversal,
     // as petgraph requires implementing NodeIndex/IndexType
-    // on our Point for this.)
+    // on our Point for this.
 
     // What we have:
     let dep = bipeds[0]; // Point of departure
@@ -149,27 +149,32 @@ pub fn process(input: &str) -> miette::Result<String, AocError> {
     let predecessor = start; // As all goes both ways, this hints to the
                              // direction *not* to take.
 
-    // Recursive fn, extremely non-generic - doesn't matter here...
+    // Recursion doesn't hold on real graphs; so loop...
     fn traverse_and_count(
-        dep: Point,
+        mut dep: Point,
         goal: Point,
-        predecessor: Point,
+        mut predecessor: Point,
         graph: GraphMap<Point, (), Directed>,
-        count: u16,
+        mut count: u16,
     ) -> u16 {
-        let next = graph
-            .edges_directed(dep, Outgoing)
-            .into_iter()
-            .filter(|(_, my_out, _)| *my_out != predecessor)
-            .collect::<Vec<(Point, Point, &())>>();
-        assert!(next.len() == 1);
-        let (_, next, _) = next[0];
+        loop {
+            let next = graph
+                .edges_directed(dep, Outgoing)
+                .into_iter()
+                .filter(|(_, my_out, _)| *my_out != predecessor)
+                .collect::<Vec<(Point, Point, &())>>();
+            assert!(next.len() == 1);
+            let (_, next, _) = next[0];
 
-        if goal != next {
-            dbg!(traverse_and_count(next, goal, dep, graph, count + 1))
-        } else {
-            count
+            if goal == next {
+                break;
+            } else {
+                predecessor = dep;
+                dep = next;
+                count += 1
+            }
         }
+        count
     }
 
     let count = traverse_and_count(dep, goal, predecessor, graph, 2);
