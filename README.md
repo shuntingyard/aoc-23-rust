@@ -37,3 +37,8 @@ for a rusty take in 2023.
         calculated the least common multiple.
 
 9. Mirage Maintenance - nothing easier than recursion 😎
+
+10. Pipe Maze
+
+    - part1: learning to use the `petgraph` crate
+        (plus implementing Hash and Eq, thrown away later).
